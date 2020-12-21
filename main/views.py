@@ -5,9 +5,10 @@ from django.contrib.auth.forms import (
 )
 from django.contrib import messages
 from django.contrib.auth import logout, authenticate, login, update_session_auth_hash
-from .forms import NewUserForm, EditProfileForm
+from .forms import NewUserForm, EditProfileForm, DocumentForm
 from django.contrib.auth.models import User
 from django.views.generic import ListView, DetailView
+from .models import  Document
 
 def home(request):
     return render(request = request,
@@ -95,3 +96,15 @@ def change_password(request):
         form = PasswordChangeForm(user=request.user)
         args = {"form": form}
         return render(request,"main/change_password.html",args)
+
+def upload_file(request):
+    if request.method == 'POST':
+        form = DocumentForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+    else:
+        form = DocumentForm()
+    return render(request, 'main/upload.html', {
+        'form': form
+    })

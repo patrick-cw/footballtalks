@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
+from .models import Document
 
 class NewUserForm(UserCreationForm):
     email = forms.EmailField(required=True)
@@ -36,3 +37,8 @@ class EditProfileForm(UserChangeForm):
             'first_name': _('First Name'),
             'last_name': _('Last Name')
         }
+
+class DocumentForm(forms.ModelForm):
+    class Meta:
+        model = Document
+        fields = ('description', 'document', )
