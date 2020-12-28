@@ -1,5 +1,5 @@
-from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.shortcuts import get_object_or_404, redirect, render
+from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.forms import (
     AuthenticationForm,UserChangeForm, PasswordChangeForm
 )
@@ -8,12 +8,13 @@ from django.contrib.auth import logout, authenticate, login, update_session_auth
 from .forms import NewUserForm, EditProfileForm, DocumentForm
 from django.contrib.auth.models import User
 from django.views.generic import ListView, DetailView
-from .models import  Document
+from .models import  Document,BlogPost
 
 def home(request):
     return render(request = request,
                   template_name='main/home.html',
-                  context = {})
+                  context= {})
+
                   
 def register(request):
     if request.method == "POST":
@@ -108,3 +109,14 @@ def upload_file(request):
     return render(request, 'main/upload.html', {
         'form': form
     })
+def news(request):
+    qs = BlogPost.objects.all()
+    return render(request = request,
+                  template_name='main/news.html',
+                  context= {'object_list': qs})
+
+
+def read_article(request, slug):
+    obj = get_object_or_404(BlogPost, slug=slug)
+    return render(request, "main/read_article.html", context = {'object': obj})
+
