@@ -1,5 +1,30 @@
 {% extends "main/base.html" %}
-
+{% load static%}
 {% block content %}
     
+<div class="container-fluid">
+    <div class="row" style="margin-top:50px;">
+    <div class="col-md-3">
+    </div>
+       
+    <div class="col-md-6">
+        <div class= "card mb-3">
+            <div class = "card-body">
+                <h5 class="card-title"style="text-align:center;"><img src="{% static 'img/logo-black.png' %}" alt="Card image cap" width="60" height="60"><br><br>Welcome to Football Talks</h5>
+                <p class="card-body" style="text-align:center;"> 
+                    We provide most up to date football news and football schedule. 
+                    We have 3 features that you can use here:<br><br>
+                    <a href="/news" style="text-align:center;">NEWS</a> <br><br>
+                   
+                    <a href="/upload" style="text-align:center;">UPLOAD</a> <br><br>
+
+                    <a href="/matches" style="text-align:center;">MATCHES</a>
+                </p>
+            </div>
+        </div>
+    </div>  
+    <div class="col-md-3">
+    </div>
+    
+   
 {% endblock %} 
