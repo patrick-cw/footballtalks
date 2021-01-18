@@ -22,6 +22,7 @@ app_name = "main"
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("", views.home, name="home"),
+    path("",include("schedule.urls")),
     path("register/", views.register,name="register"),
     path("login/", views.login_request, name="login"),
     path("logout/", views.logout_request, name="logout"),
@@ -32,4 +33,5 @@ urlpatterns = [
     path("upload/", views.upload_file, name="upload"),
     path("news/", views.news, name="news"),
     path('news/<str:slug>/', views.read_article, name="read_article"),
+    
 ]
